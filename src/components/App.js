@@ -1,7 +1,6 @@
 /* eslint no-invalid-this: 0 */
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import {pathPref} from '../config';
 
 const App = function({children}, {router}) {
   const viewportClass = router.isActive('viewport') ? 'active' : 'inactive';
@@ -11,8 +10,8 @@ const App = function({children}, {router}) {
       <h1>Welcome</h1>
       <div>
         <nav>
-          <Link className={viewportClass} to={`${pathPref}/viewport`}>Show Viewport Values</Link>
-          <Link className={numberfactClass} to={`${pathPref}/numberfact`}>Show a Number Fact</Link>
+          <Link className={viewportClass} to="viewport">Show Viewport Values</Link>
+          <Link className={numberfactClass} to="numberfact">Show a Number Fact</Link>
         </nav>
         {children}
       </div>
