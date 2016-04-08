@@ -1,32 +1,34 @@
 /* eslint no-invalid-this: 0 */
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
+import {pathPref} from '../config';
 
-class App extends Component {
-  static propTypes = {
-    winsize: PropTypes.object.isRequired
-  }
-  shouldComponentUpdate(nextProps) {
-    const upd = this.props.winsize !== nextProps.winsize;
-    console.log(`Shouldupdate: ${upd}`);
-    return upd;
-  }
-  render() {
-    return (
+const App = function({children}, {router}) {
+  const viewportClass = router.isActive('viewport') ? 'active' : 'inactive';
+  const numberfactClass = router.isActive('numberfact') ? 'active' : 'inactive';
+  return (
+    <div>
+      <h1>Welcome</h1>
       <div>
-        <h1>Welcome</h1>
-        <div>
-          {this.props.winsize.map((v, k) => <p key={k}>{k}: {v}</p>)}
-        </div>
+        <nav>
+          <Link className={viewportClass} to={`${pathPref}/viewport`}>Show Viewport Values</Link>
+          <Link className={numberfactClass} to={`${pathPref}/numberfact`}>Show a Number Fact</Link>
+        </nav>
+        {children}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-function mapStateToProps(state) {
-  return {
-    winsize: state.get('winsize')
-  };
-}
+App.contextTypes = {
+  router: PropTypes.object
+};
 
-export default connect(mapStateToProps)(App);
+App.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ])
+};
+
+export default App;

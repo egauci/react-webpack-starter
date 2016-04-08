@@ -1,0 +1,5 @@
+:local(.label) {
+  color: red;
+  display: inline-block;
+  min-width: 60px;
+}

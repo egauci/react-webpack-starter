@@ -3,21 +3,28 @@ import 'babel-polyfill';
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import promiseMiddleware from 'redux-promise';
 import reducer from './reducers';
 import App from './components/App';
+import Viewport from './components/viewport';
+import NumberFact from './components/numberfact';
 import {setWinsize, scrollY} from './actions';
 import {winResize, getWinSize} from 'winresize-event';
 import Immutable from 'immutable';
 import {Router, Route, browserHistory} from 'react-router';
 import {pathPref} from './config';
 
-let store = createStore(reducer, Immutable.Map());
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
+let store = createStoreWithMiddleware(reducer, Immutable.Map());
 
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path={`${pathPref}/`} component={App} />
+      <Route path={`${pathPref}/`} component={App}>
+        <Route path="viewport" component={Viewport} />
+        <Route path="numberfact" component={NumberFact} />
+      </Route>
     </Router>
   </Provider>,
   document.getElementById('the-app')

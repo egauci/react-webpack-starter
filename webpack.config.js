@@ -101,7 +101,7 @@ if (TARGET === 'start' || !TARGET) {
         {
           test: /\.css$/,
           loaders: ['style', 'css'],
-          include: PATHS.style
+          include: [PATHS.style, PATHS.app]
         }
       ]
     },
@@ -134,7 +134,7 @@ if (TARGET === 'build' || TARGET === 'stats') {
         {
           test: /\.css$/,
           loader: ExtractTextPlugin.extract('style', 'css'),
-          include: PATHS.style
+          include: [PATHS.style, PATHS.app]
         }
       ]
     },

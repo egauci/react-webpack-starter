@@ -3,13 +3,13 @@
  */
 
 // set a path prefix for router based on current window location at load time.
-// This assumes that when we run in production, the app will not be at the server
-// root. So, if app is at http://www.example.com/myApp/ then set pref to /myApp.
-let pref;
-if (window.location.pathname.includes('myApp')) {
-  pref = '/myApp';
-} else {
-  pref = '';
-}
+// This assumes that when we run in production. This assumes the app root is
+// zero or one level from the web root. For example:
+// http://www.example.com/myApp/   or   http://www.example.com/
 
-export const pathPref = pref;
+const splitPath = location.pathname.split('/');
+export const pathPref = splitPath.length === 2 ? '' : splitPath[1];
+
+console.log(`Path Pref: ${pathPref}`);
+
+export const numbersApiUrl = 'https://numbersapi.p.mashape.com/random/trivia?fragment=false&json=true';

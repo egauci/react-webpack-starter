@@ -1,0 +1,17 @@
+nav a, nav a:visited {
+  display: inline-block;
+  margin-right: 20px;
+  text-decoration: none;
+  color: brown;
+  padding: 10px 15px;
+  min-width: 210px;
+  border-radius: 2px;
+  border: 1px solid gray;
+  line-height: 16px;
+  font-size: 14px;
+}
+
+nav a.active {
+  font-size: 15px;
+  font-weight: bold;
+}
