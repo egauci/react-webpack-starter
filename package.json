@@ -1,13 +1,14 @@
 {
-  "name": "nav",
+  "name": "react-webpack-starter",
   "version": "1.1.0",
-  "description": "Nav Exploration",
+  "description": "React/Webpack Starter",
   "scripts": {
     "stats": "webpack --profile --json > stats.json",
     "build": "webpack",
     "start": "webpack-dev-server"
   },
-  "repository": "https://github.com/egauci/nav.git",
+  "repository": "https://github.com/egauci/react-webpack-starter.git",
+  "license": "ISC",
   "author": "Ed G",
   "devDependencies": {
     "babel-eslint": "^6.0.2",
