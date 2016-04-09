@@ -8,7 +8,7 @@
 // http://www.example.com/myApp/   or   http://www.example.com/
 
 const splitPath = location.pathname.split('/');
-export const pathPref = splitPath.length === 2 ? '/' : `/${splitPath[1]}`;
+export const pathPref = splitPath.length === 2 ? '' : `/${splitPath[1]}`;
 
 console.log(`Path Pref: ${pathPref}`);
 

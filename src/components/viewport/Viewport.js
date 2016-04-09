@@ -9,7 +9,6 @@ class Viewport extends Component {
   }
   shouldComponentUpdate(nextProps) {
     const upd = this.props.winsize !== nextProps.winsize;
-    console.log(`Shouldupdate: ${upd}`);
     return upd;
   }
   render() {
