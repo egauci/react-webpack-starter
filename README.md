@@ -25,7 +25,7 @@ Why this particular stack?
 About
 -----
 
-Many things I work on need viewport information, so that's included.
+Many things I work on need viewport information, so that's included. The viewport monitor updates the redux store with window size and scroll position.
 
 For a simple async example, I included a random number fact component that uses this API: https://market.mashape.com/divad12/numbers-1#get-random-fact
 
@@ -57,5 +57,4 @@ configured to run the app under */nav*.
 TODOs:
 -----
 
-- Redux dev tools
 - tests

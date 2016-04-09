@@ -1,4 +1,3 @@
-/* eslint new-cap:0, camelcase: 0 */
 import 'babel-polyfill';
 import React from 'react';
 import {render} from 'react-dom';
@@ -9,12 +8,11 @@ import reducer from './reducers';
 import App from './components/App';
 import Viewport from './components/viewport';
 import NumberFact from './components/numberfact';
-import {setWinsize, scrollY} from './actions';
-import {winResize, getWinSize} from 'winresize-event';
 import Immutable from 'immutable';
 import {Router, Route, browserHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {pathPref} from './config';
+import setViewportMonitor from './utilities/viewport';
 
 // Create the redux store - apply middleware and add support
 // for the Chrome Redux Devtools Extention
@@ -39,6 +37,8 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: () => store.getState().get('routing').toJS()
 });
 
+setViewportMonitor(store); // pass store to viewport size monitor
+
 render(
   <Provider store={store}>
     <Router history={history}>
@@ -50,36 +50,3 @@ render(
   </Provider>,
   document.getElementById('the-app')
 );
-
-// The code below deals with window size and vertical scroll values.
-// Changes in these trigger redux actions
-const newWinSize = (winsize, docHeight) => {
-  let width = winsize.width;
-  if (document.body.scrollWidth !== undefined && document.body.scrollWidth < width) {
-    width = document.body.scrollWidth;
-  }
-  if (document.documentElement.offsetWidth !== undefined && document.documentElement.offsetWidth < width) {
-    width = document.documentElement.offsetWidth;
-  }
-  const size = Object.assign({}, winsize, {width}, {docHeight});
-  store.dispatch(setWinsize(size));
-};
-
-winResize.on(() => {
-  setTimeout(() => newWinSize(getWinSize(), document.documentElement.offsetHeight), 10);
-});
-newWinSize(getWinSize(), document.documentElement.offsetHeight);
-setTimeout(() => newWinSize(getWinSize(), document.documentElement.offsetHeight), 500);
-
-let lastKnownScrollPosition = 0;
-let ticking = false;
-window.addEventListener('scroll', function() {
-  lastKnownScrollPosition = window.scrollY;
-  if (!ticking) {
-    window.requestAnimationFrame(function() {
-      store.dispatch(scrollY(lastKnownScrollPosition));
-      ticking = false;
-    });
-  }
-  ticking = true;
-});
