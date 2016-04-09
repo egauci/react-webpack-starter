@@ -3,7 +3,7 @@
  */
 
 // set a path prefix for router based on current window location at load time.
-// This assumes that when we run in production. This assumes the app root is
+// This assumes the app root is
 // zero or one level from the web root. For example:
 // http://www.example.com/myApp/   or   http://www.example.com/
 
