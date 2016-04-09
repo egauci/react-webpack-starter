@@ -116,6 +116,7 @@ if (TARGET === 'start' || !TARGET) {
 
 if (TARGET === 'build' || TARGET === 'stats') {
   module.exports = merge(common, {
+    // devtool: '#source-map',
     // Define vendor entry point needed for splitting
     entry: {
       // Set up an entry chunk for our vendor bundle.

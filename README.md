@@ -58,5 +58,4 @@ TODOs:
 -----
 
 - Redux dev tools
-- react-router-redux
 - tests

@@ -13,14 +13,21 @@ import {setWinsize, scrollY} from './actions';
 import {winResize, getWinSize} from 'winresize-event';
 import Immutable from 'immutable';
 import {Router, Route, browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
 import {pathPref} from './config';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 let store = createStoreWithMiddleware(reducer, Immutable.Map());
 
+// react-router-redux needs some help in dealing with Immutable
+// Also see reducers/routing.js.
+const history = syncHistoryWithStore(browserHistory, store, {
+  selectLocationState: () => store.getState().get('routing').toJS()
+});
+
 render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path={`${pathPref}/`} component={App}>
         <Route path="viewport" component={Viewport} />
         <Route path="numberfact" component={NumberFact} />
