@@ -9,6 +9,8 @@ const fact = (state = initState, action) => {
       return Immutable.Map(action.payload.data);
     }
     return state;
+  case 'CLEAR_FACT':
+    return initState;
   default:
     return state;
   }

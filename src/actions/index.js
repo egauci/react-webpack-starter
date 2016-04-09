@@ -6,6 +6,9 @@ export const setWinsize = payload => ({type: 'SET_WINSIZE', payload});
 
 export const scrollY = payload => ({type: 'SET_SCROLLY', payload});
 
+// getFact makes an API call to fetch a random number fact. Axios returns
+// a promise, which will be intercepted by the promise middleware
+// and held until it resolves.
 export const getFact = () => {
   return {
     type: 'GET_FACT',
@@ -16,3 +19,5 @@ export const getFact = () => {
     })
   };
 };
+
+export const clearFact = () => ({type: 'CLEAR_FACT'});

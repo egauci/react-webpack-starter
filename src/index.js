@@ -30,6 +30,8 @@ render(
   document.getElementById('the-app')
 );
 
+// The code below deals with window size and vertical scroll values.
+// Changes in these trigger redux actions
 const newWinSize = (winsize, docHeight) => {
   let width = winsize.width;
   if (document.body.scrollWidth !== undefined && document.body.scrollWidth < width) {

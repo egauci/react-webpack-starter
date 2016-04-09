@@ -1,12 +1,9 @@
-/* eslint no-invalid-this: 0 */
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {pathPref} from '../config';
 
-const viewportPath = `${pathPref}/viewport`;
-const numberfactPath = `${pathPref}/numberfact`;
-
-const App = function({children}, {router}) {
+const App = function({config, children}, {router}) {
+  const {viewportPath, numberfactPath} = config.toObject();
   const viewportClass = router.isActive(viewportPath) ? 'active' : 'inactive';
   const numberfactClass = router.isActive(numberfactPath) ? 'active' : 'inactive';
   return (
@@ -31,7 +28,9 @@ App.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element)
-  ])
+  ]),
+  config: PropTypes.object.isRequired
 };
 
-export default App;
+const mapStateToProps = (state) => ({config: state.get('config')});
+export default connect(mapStateToProps)(App);

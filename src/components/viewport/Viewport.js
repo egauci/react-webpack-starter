@@ -1,4 +1,3 @@
-/* eslint no-invalid-this: 0 */
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import lcss from './Viewport.css';
@@ -11,13 +10,22 @@ class Viewport extends Component {
     const upd = this.props.winsize !== nextProps.winsize;
     return upd;
   }
+  getItems() {
+    const list = this.props.winsize.reduce(
+      (r, v, k) => [...r, [k, v]],
+      []
+    );
+    return (
+      <div>
+        {list.map(itm => <p key={itm[0]}><span className={lcss.label}>{itm[0]}:</span> {itm[1]}</p>)}
+      </div>
+    );
+  }
   render() {
     return (
       <div>
         <h2>Viewport Values</h2>
-        <div>
-          {this.props.winsize.map((v, k) => <p key={k}><span className={lcss.label}>{k}:</span> {v}</p>)}
-        </div>
+        {this.getItems()}
       </div>
     );
   }
