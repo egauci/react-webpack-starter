@@ -4,7 +4,7 @@ import {numbersApiUrl} from '../config';
 
 export const setWinsize = payload => ({type: 'SET_WINSIZE', payload});
 
-export const scrollY = payload => ({type: 'SET_SCROLLY', payload});
+export const scroll = payload => ({type: 'SET_SCROLL', payload});
 
 // getFact makes an API call to fetch a random number fact. Axios returns
 // a promise, which will be intercepted by the promise middleware

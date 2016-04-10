@@ -1,7 +1,7 @@
 // This module monitors the viewport. It should be called once
 // with the redux store. It will call winResize and
-// scrollY redux action creators.
-import {setWinsize, scrollY} from '../actions';
+// scroll redux action creators.
+import {setWinsize, scroll} from '../actions';
 import {winResize, getWinSize} from 'winresize-event';
 
 let store;
@@ -29,13 +29,13 @@ function setViewportMonitor(newStore) {
   newWinSize(getWinSize(), document.documentElement.offsetHeight);
   setTimeout(() => newWinSize(getWinSize(), document.documentElement.offsetHeight), 1000);
 
-  let lastKnownScrollPosition = 0;
+  let lastKnownScrollPosition = {x: 0, y: 0};
   let ticking = false;
   window.addEventListener('scroll', function() {
-    lastKnownScrollPosition = window.scrollY;
+    lastKnownScrollPosition = {x: window.scrollX, y: window.scrollY};
     if (!ticking) {
       window.requestAnimationFrame(function() {
-        store.dispatch(scrollY(lastKnownScrollPosition));
+        store.dispatch(scroll(lastKnownScrollPosition));
         ticking = false;
       });
     }

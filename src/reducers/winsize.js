@@ -4,18 +4,23 @@ const initState = Immutable.Map({
   height: 0,        // win height
   width: 0,         // win width
   docHeight: 0,     // document height
-  scrollY: 0        // window vertical scroll position
+  scrollY: 0,       // window vertical scroll position
+  scrollX: 0        // window horizontal scroll position
 });
 
 const winsize = (state = initState, action) => {
   switch (action.type) {
   case 'SET_WINSIZE':
-    state = state.set('height', action.payload.height);
-    state = state.set('width', action.payload.width);
-    state = state.set('docHeight', action.payload.docHeight);
-    return state;
-  case 'SET_SCROLLY':
-    return state.set('scrollY', action.payload);
+    return state.withMutations(map => {
+      map.set('height', action.payload.height).
+          set('width', action.payload.width).
+          set('docHeight', action.payload.docHeight);
+    });
+  case 'SET_SCROLL':
+    return state.withMutations(map => {
+      map.set('scrollY', action.payload.y).
+          set('scrollX', action.payload.x);
+    });
   default:
     return state;
   }
