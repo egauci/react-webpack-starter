@@ -6,7 +6,7 @@ import lcss from './Numberfact.css';
 class Numberfact extends Component {
   static propTypes = {
     clearFact: PropTypes.func.isRequired,
-    fact: PropTypes.object,
+    fact: PropTypes.object.isRequired,
     getFact: PropTypes.func.isRequired
   }
   componentWillMount() {

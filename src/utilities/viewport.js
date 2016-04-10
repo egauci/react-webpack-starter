@@ -1,6 +1,8 @@
 // This module monitors the viewport. It should be called once
 // with the redux store. It will call winResize and
 // scroll redux action creators.
+// Note that the documentElement height is included but it is not monitored
+// for change. It is just reported along with viewport size.
 import {setWinsize, scroll} from '../actions';
 import {winResize, getWinSize} from 'winresize-event';
 
