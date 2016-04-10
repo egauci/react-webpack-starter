@@ -1,6 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {getFact, clearFact} from '../../actions';
 import lcss from './Numberfact.css';
 
 class Numberfact extends Component {
@@ -29,10 +27,4 @@ class Numberfact extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    fact: state.get('fact')
-  };
-}
-
-export default connect(mapStateToProps, {getFact, clearFact})(Numberfact);
+export default Numberfact;

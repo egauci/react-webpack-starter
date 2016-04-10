@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
 import lcss from './Viewport.css';
 
 class Viewport extends Component {
@@ -11,6 +10,8 @@ class Viewport extends Component {
     return upd;
   }
   getItems() {
+    // mapping over an Immutable.map produces an object. React prefers
+    // arrays of children, so convert the map to a list first.
     const list = this.props.winsize.reduce(
       (r, v, k) => [...r, [k, v]],
       []
@@ -31,10 +32,4 @@ class Viewport extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    winsize: state.get('winsize')
-  };
-}
-
-export default connect(mapStateToProps)(Viewport);
+export default Viewport;

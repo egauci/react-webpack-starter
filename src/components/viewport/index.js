@@ -1,2 +1,10 @@
+import {connect} from 'react-redux';
 import Viewport from './Viewport';
-export default Viewport;
+
+function mapStateToProps(state) {
+  return {
+    winsize: state.get('winsize')
+  };
+}
+
+export default connect(mapStateToProps)(Viewport);
