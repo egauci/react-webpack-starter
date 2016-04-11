@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import promiseMiddleware from 'redux-promise';
 import reducer from './reducers';
-import App from './components/App';
+import App from './components/app';
 import Viewport from './components/viewport';
 import NumberFact from './components/numberfact';
 import Immutable from 'immutable';
