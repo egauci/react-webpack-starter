@@ -6,13 +6,14 @@
 import {setWinsize, scroll} from '../actions';
 import {winResize, getWinSize} from 'winresize-event';
 
-let store;
+let dispatch;
 
-function setViewportMonitor(newStore) {
-  if (store) {
+function setViewportMonitor(store) {
+  if (dispatch) {
     return; // just once
   }
-  store = newStore;
+  dispatch = store.dispatch;
+
   const newWinSize = (winsize, docHeight) => {
     let width = winsize.width;
     if (document.body.scrollWidth !== undefined && document.body.scrollWidth < width) {
@@ -22,14 +23,14 @@ function setViewportMonitor(newStore) {
       width = document.documentElement.offsetWidth;
     }
     const size = Object.assign({}, winsize, {width}, {docHeight});
-    store.dispatch(setWinsize(size));
+    dispatch(setWinsize(size));
   };
 
   winResize.on(() => {
     setTimeout(() => newWinSize(getWinSize(), document.documentElement.offsetHeight), 10);
   });
   newWinSize(getWinSize(), document.documentElement.offsetHeight);
-  setTimeout(() => newWinSize(getWinSize(), document.documentElement.offsetHeight), 1000);
+  setTimeout(() => newWinSize(getWinSize(), document.documentElement.offsetHeight), 500);
 
   let lastKnownScrollPosition = {x: 0, y: 0};
   let ticking = false;
@@ -37,7 +38,7 @@ function setViewportMonitor(newStore) {
     lastKnownScrollPosition = {x: window.scrollX, y: window.scrollY};
     if (!ticking) {
       window.requestAnimationFrame(function() {
-        store.dispatch(scroll(lastKnownScrollPosition));
+        dispatch(scroll(lastKnownScrollPosition));
         ticking = false;
       });
     }

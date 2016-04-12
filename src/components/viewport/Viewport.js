@@ -10,8 +10,8 @@ class Viewport extends Component {
     return upd;
   }
   getItems() {
-    // mapping over an Immutable.map produces an object. React prefers
-    // arrays of children, so convert the map to a list first.
+    // mapping over an Immutable.Map produces an object. React prefers
+    // children as an array, so convert the map to an array first.
     const list = this.props.winsize.reduce(
       (r, v, k) => [...r, [k, v]],
       []

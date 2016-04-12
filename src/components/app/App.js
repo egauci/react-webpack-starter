@@ -1,7 +1,16 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 
-class App extends Component {
+export default class extends Component {
+  static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.arrayOf(PropTypes.element)
+    ]),
+    config: PropTypes.object.isRequired,
+    numberfactActive: PropTypes.bool,
+    viewportActive: PropTypes.bool
+  }
   render() {
     const {config, viewportActive, numberfactActive, children} = this.props;
     const {viewportPath, numberfactPath} = config.toObject();
@@ -10,26 +19,12 @@ class App extends Component {
     return (
       <div>
         <h1>Welcome</h1>
-        <div>
-          <nav>
-            <Link className={viewportClass} to={viewportPath}>Show Viewport Values</Link>
-            <Link className={numberfactClass} to={numberfactPath}>Show a Number Fact</Link>
-          </nav>
-          {children}
-        </div>
+        <nav>
+          <Link className={viewportClass} to={viewportPath}>Show Viewport Values</Link>
+          <Link className={numberfactClass} to={numberfactPath}>Show a Number Fact</Link>
+        </nav>
+        {children}
       </div>
     );
   }
 }
-
-App.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
-  ]),
-  config: PropTypes.object.isRequired,
-  numberfactActive: PropTypes.bool,
-  viewportActive: PropTypes.bool
-};
-
-export default App;
