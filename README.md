@@ -1,11 +1,14 @@
-My React/React Router/Redux/Immutablejs/Webpack Starter
+React/React Router/Redux/Immutablejs/Webpack Starter
 ===========================================
 
-This is a simple starter app. There are better and more complete
-examples, but this one hits my own sweet spot at this time.
+This is a simple starter client-side web app. There are better and more complete
+examples, but this one hits my own sweet spot at this time. It is client-side
+only, as that is what I usually need. My goal is to be able to clone this and
+use it as scaffolding for new projects.
 
 Most of the Webpack config is from Juho Vepsäläinen (@bebraw)'s
-book [Survivejs Webpack](https://github.com/survivejs/webpack). You should consider buying it.
+book [Survivejs Webpack](https://github.com/survivejs/webpack).
+You should consider buying it.
 
 Other inspiration comes from Stephen Grider (@StephenGrider)'s
 Reactjs courses on [Udemy](https://www.udemy.com/). You should check
@@ -20,16 +23,21 @@ Why this particular stack?
 - React Router - Good fit with React
 - Redux - Makes it dead simple to keep track of app state
 - Immutable - Eliminates difficult to find bugs caused by unwitting mutations.
-- Webpack - I'm not 100% sold on Webpack. Browserify is easier and you can accomplish a lot with it. I want to learn Webpack, so here it is.
+- Webpack - I'm not 100% sold on Webpack. Browserify is easier and you can
+accomplish a lot with it. I want to learn Webpack, so here it is.
 
 About
 -----
 
-Many things I work on need viewport information, so that's included. The viewport monitor updates the redux store with window size and scroll position.
+Many things I work on need viewport information, so that's included.
+The viewport monitor updates the redux store with window size and
+scroll position.
 
-For a simple async example, I included a random number fact component that uses this API: https://market.mashape.com/divad12/numbers-1#get-random-fact
+For a simple async example, I included a random number fact component
+that uses this API: https://market.mashape.com/divad12/numbers-1#get-random-fact
 
-If you want to build and run this, you will need an API key (free) which you can get from mashape.com. Set it in *src/config/apikeys.js* like this:
+If you want to build and run this, you will need an API key (free) which
+you can get from mashape.com. Set it in *src/config/apikeys.js* like this:
 
     export const numbersApiKey = 'the key';
 
@@ -54,7 +62,9 @@ Look at https://github.com/reactjs/react-router/blob/master/docs/guides/Historie
 to configure web servers to support browser history. This repo has a sample Apache .htaccess files
 configured to run the app under */nav*.
 
+To run unit tests: "npm run test". For continuous testing, "npm run test:watch".
+
 TODOs:
 -----
 
-- tests
+- integration tests

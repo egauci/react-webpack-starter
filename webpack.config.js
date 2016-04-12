@@ -51,12 +51,6 @@ const common = {
   ],
   module: {
     loaders: [
-      // Define development specific CSS setup
-      {
-        test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel'],
-        include: PATHS.app
-      },
       {
         test: /.*\.svg$/,
         loaders: [
@@ -97,6 +91,11 @@ if (TARGET === 'start' || !TARGET) {
     },
     module: {
       loaders: [
+        {
+          test: /\.jsx?$/,
+          loaders: ['react-hot', 'babel'],
+          include: PATHS.app
+        },
         // Define development specific CSS setup
         {
           test: /\.css$/,
@@ -131,6 +130,11 @@ if (TARGET === 'build' || TARGET === 'stats') {
     },
     module: {
       loaders: [
+        {
+          test: /\.jsx?$/,
+          loaders: ['babel'],
+          include: PATHS.app
+        },
         // Extract CSS during build
         {
           test: /\.css$/,
