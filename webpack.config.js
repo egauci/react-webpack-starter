@@ -54,7 +54,7 @@ const common = {
       // Define development specific CSS setup
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
+        loaders: ['react-hot', 'babel'],
         include: PATHS.app
       },
       {
