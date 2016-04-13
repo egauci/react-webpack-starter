@@ -7,3 +7,7 @@
 :local(.waiting) {
   font-size: 24px;
 }
+
+:local(.button) {
+  color: brown;
+}
