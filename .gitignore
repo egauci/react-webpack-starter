@@ -1,5 +1,4 @@
 node_modules
 build
 apikeys.js
-*.json
 *.log
