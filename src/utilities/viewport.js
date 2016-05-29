@@ -3,10 +3,15 @@
 // scroll redux action creators.
 // Note that the documentElement height is included but it is not monitored
 // for change. It is just reported along with viewport size.
-import {setWinsize, scroll} from '../actions';
-import {winResize, getWinSize} from 'winresize-event';
+import {setWinsize} from '../actions';
+import viewport from 'viewport-event';
 
 let dispatch;
+
+const sendViewport = vp => {
+  vp.docHeight = document.documentElement.offsetHeight;
+  dispatch(setWinsize(vp));
+};
 
 function setViewportMonitor(store) {
   if (dispatch) {
@@ -14,36 +19,9 @@ function setViewportMonitor(store) {
   }
   dispatch = store.dispatch;
 
-  const newWinSize = (winsize, docHeight) => {
-    let width = winsize.width;
-    if (document.body.scrollWidth !== undefined && document.body.scrollWidth < width) {
-      width = document.body.scrollWidth;
-    }
-    if (document.documentElement.offsetWidth !== undefined && document.documentElement.offsetWidth < width) {
-      width = document.documentElement.offsetWidth;
-    }
-    const size = Object.assign({}, winsize, {width}, {docHeight});
-    dispatch(setWinsize(size));
-  };
+  viewport.on('viewport', sendViewport);
 
-  winResize.on(() => {
-    setTimeout(() => newWinSize(getWinSize(), document.documentElement.offsetHeight), 10);
-  });
-  newWinSize(getWinSize(), document.documentElement.offsetHeight);
-  setTimeout(() => newWinSize(getWinSize(), document.documentElement.offsetHeight), 500);
-
-  let lastKnownScrollPosition = {x: 0, y: 0};
-  let ticking = false;
-  window.addEventListener('scroll', function() {
-    lastKnownScrollPosition = {x: window.scrollX, y: window.scrollY};
-    if (!ticking) {
-      window.requestAnimationFrame(function() {
-        dispatch(scroll(lastKnownScrollPosition));
-        ticking = false;
-      });
-    }
-    ticking = true;
-  });
+  sendViewport(viewport.getViewport());
 }
 
 export default setViewportMonitor;

@@ -18,7 +18,9 @@ class Viewport extends Component {
     );
     return (
       <div>
-        {list.map(itm => <p key={itm[0]}><span className={lcss.label}>{itm[0]}:</span> {itm[1]}</p>)}
+        {list
+          .filter(itm => itm[0] !== 'isIOS')
+          .map(itm => <p key={itm[0]}><span className={lcss.label}>{itm[0]}:</span> {itm[1]}</p>)}
       </div>
     );
   }
