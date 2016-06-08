@@ -10,6 +10,8 @@ describe('winsize', () => {
     const state = Map({
       height: 0,
       width: 0,
+      clientHeight: 0,
+      clientWidth: 0,
       docHeight: 0,
       scrollY: 0,
       scrollX: 0
@@ -18,35 +20,19 @@ describe('winsize', () => {
       height: 100,
       width: 200,
       docHeight: 300,
-      scrollY: 0,
-      scrollX: 0
+      clientHeight: 90,
+      clientWidth: 180,
+      scrollY: 52,
+      scrollX: 62
     });
     const action = setWinsize({
       height: 100,
       width: 200,
-      docHeight: 300
-    });
-    const newState = winsize(state, action);
-    expect(newState).to.equal(tgtState);
-  });
-  it('reduces on SET_SCROLL', () => {
-    const state = Map({
-      height: 0,
-      width: 0,
-      docHeight: 0,
-      scrollY: 0,
-      scrollX: 0
-    });
-    const tgtState = Map({
-      height: 0,
-      width: 0,
-      docHeight: 0,
-      scrollY: 50,
-      scrollX: 60
-    });
-    const action = scroll({
-      y: 50,
-      x: 60
+      docHeight: 300,
+      clientHeight: 90,
+      clientWidth: 180,
+      scrollY: 52,
+      scrollX: 62
     });
     const newState = winsize(state, action);
     expect(newState).to.equal(tgtState);
