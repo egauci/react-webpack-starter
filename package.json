@@ -53,6 +53,6 @@
     "redux": "^3.5.2",
     "redux-immutable": "^3.0.6",
     "redux-promise": "^0.5.3",
-    "viewport-event": "^1.0.2"
+    "viewport-event": "^1.0.3"
   }
 }
