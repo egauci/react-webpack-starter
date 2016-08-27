@@ -42,7 +42,7 @@
     "webpack-merge": "^0.14.1"
   },
   "dependencies": {
-    "axios": "^0.13.1",
+    "axios": "^0.14.0",
     "babel-polyfill": "^6.13.0",
     "immutable": "^3.8.1",
     "react": "^15.3.1",
