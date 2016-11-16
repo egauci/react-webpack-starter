@@ -92,7 +92,7 @@ if (TARGET === 'start' || !TARGET) {
       loaders: [
         {
           test: /\.jsx?$/,
-          loaders: ['react-hot', 'babel'],
+          loaders: ['babel'],
           include: PATHS.app
         },
         // Define development specific CSS setup

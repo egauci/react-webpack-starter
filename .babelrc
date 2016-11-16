@@ -4,7 +4,7 @@
     "react",
     "stage-2"
   ],
-  "plugins": [],
+  "plugins": ["react-hot-loader/babel"],
   "ignore": ["node_modules/"],
   "env": {
     "start": {
