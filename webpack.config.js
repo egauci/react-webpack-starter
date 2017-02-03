@@ -147,7 +147,7 @@ if (TARGET === 'build' || TARGET === 'stats') {
     plugins: [
       // Output extracted CSS to a file
       new ExtractTextPlugin({
-        filename: 'name].[chunkhash].css'
+        filename: '[name].[chunkhash].css'
       }),
       new CleanWebpackPlugin([PATHS.build]),
       // Extract vendor and manifest files
