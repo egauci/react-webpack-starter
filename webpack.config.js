@@ -46,10 +46,7 @@ const common = {
         test: /.*\.svg$/,
         use: [
           {
-            loader: 'url-loader',
-            options: {
-              limit: '2500'
-            }
+            loader: 'url-loader?limit=25000'
           },
           {
             loader: 'svgo-loader',
