@@ -21,14 +21,6 @@ const PATHS = {
   index: path.join(__dirname, 'index.ejs')
 };
 
-const svgoConfig = JSON.stringify({
-  plugins: [
-    {removeTitle: true},
-    {convertColors: {shorthex: false}},
-    {convertPathData: false}
-  ]
-});
-
 const common = {
   // Entry accepts a path or an object of entries.
   // We'll be using the latter form given it's
@@ -49,12 +41,26 @@ const common = {
     })
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /.*\.svg$/,
-        loaders: [
-          'url?limit=25000',
-          'svgo-loader?' + svgoConfig
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: '2500'
+            }
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                {removeTitle: true},
+                {convertColors: {shorthex: false}},
+                {convertPathData: false}
+              ]
+            }
+          }
         ]
       }
     ]
@@ -73,7 +79,6 @@ if (TARGET === 'start' || !TARGET) {
       historyApiFallback: true,
       hot: true,
       inline: true,
-      progress: true,
 
       // Display only errors to reduce the amount of output.
       stats: 'errors-only',
@@ -89,16 +94,16 @@ if (TARGET === 'start' || !TARGET) {
       port: process.env.PORT
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
-          loaders: ['babel'],
+          loader: 'babel-loader',
           include: PATHS.app
         },
         // Define development specific CSS setup
         {
           test: /\.css$/,
-          loaders: ['style', 'css'],
+          use: ['style-loader', 'css-loader'],
           include: [PATHS.style, PATHS.app]
         }
       ]
@@ -125,23 +130,28 @@ if (TARGET === 'build' || TARGET === 'stats') {
       chunkFilename: '[chunkhash].js'
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
-          loaders: ['babel'],
+          loader: 'babel-loader',
           include: PATHS.app
         },
         // Extract CSS during build
         {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css'),
+          loader: ExtractTextPlugin.extract({
+            fallbackLoader: 'style-loader',
+            loader: 'css-loader'
+          }),
           include: [PATHS.style, PATHS.app]
         }
       ]
     },
     plugins: [
       // Output extracted CSS to a file
-      new ExtractTextPlugin('[name].[chunkhash].css'),
+      new ExtractTextPlugin({
+        filename: 'name].[chunkhash].css'
+      }),
       new CleanWebpackPlugin([PATHS.build]),
       // Extract vendor and manifest files
       new webpack.optimize.CommonsChunkPlugin({
