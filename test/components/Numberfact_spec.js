@@ -1,7 +1,7 @@
 /* eslint no-unused-vars: 0 */
 /* globals describe, it */
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import Numberfact from '../../src/components/numberfact/Numberfact';
 import {expect} from 'chai';
 import {Map} from 'immutable';

@@ -1,7 +1,7 @@
 /* eslint no-unused-vars: 0 */
 /* globals describe, it */
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import App from '../../src/components/app/App';
 import {expect} from 'chai';
 import {OrderedMap} from 'immutable';

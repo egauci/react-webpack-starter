@@ -130,15 +130,15 @@ if (TARGET === 'build' || TARGET === 'stats') {
       rules: [
         {
           test: /\.jsx?$/,
-          loader: 'babel-loader',
+          use: 'babel-loader',
           include: PATHS.app
         },
         // Extract CSS during build
         {
           test: /\.css$/,
           loader: ExtractTextPlugin.extract({
-            fallbackLoader: 'style-loader',
-            loader: 'css-loader'
+            fallback: 'style-loader',
+            use: 'css-loader'
           }),
           include: [PATHS.style, PATHS.app]
         }

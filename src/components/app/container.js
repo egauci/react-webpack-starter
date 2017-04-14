@@ -1,5 +1,6 @@
 // High-order container to isolate App component from react-router API
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ContainedApp from './App';
 const hoc = (AppComponent) => {
   const App = (props, {router}) => {
